@@ -1,6 +1,6 @@
 Żeby uruchomić projekt:
 - musisz mieć zainstalowany python (w wersji 3.x (najlepiej wyższy niż 3.6)
-- zastosuj: py -m pip install flask, flask_restful, flask_wtf, flask_sqlalchemy, wtforms, wtforms.validators, flask_bcrypt, flask_ligin, email_validation
+- zastosuj: py -m pip install flask, flask_restful, flask_wtf, flask_sqlalchemy, wtforms, wtforms.validators, flask_bcrypt, flask_ligin, email_validatior
 - przejź do: /Flask_APP/
 - wykonaj komendę: py app.py
 
