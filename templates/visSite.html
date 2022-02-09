@@ -47,7 +47,10 @@
 {% endblock %}
 
 {% block content %}
-        <h1>Najważniejsze co mają problem tutaj (kod HTTP inny niż 200)<br>Odświeżam sie co 15 sekund bo prace nad dynamicznym ajaxem jeszcze trwają ;)</h1>
+        <h1>Najważniejsze co mają problem tutaj (kod HTTP inny niż 200)
+        <button id="endexist200" type="button" class="btn btn-lg btn-outline-danger" style="position: absolute; right: 1px;">Wykasuj rekord</button>
+        <button id="archdel200" type="button" class="btn btn-lg btn-outline-warning" style="position: absolute; right: 180px;">Archiwizuj</button>
+        <br>Odświeżam sie co 15 sekund bo prace nad dynamicznym ajaxem jeszcze trwają ;)</h1>
     <table class="table table-hover table-dark">
     <thead>
         <tr>

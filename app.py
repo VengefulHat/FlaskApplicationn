@@ -196,6 +196,33 @@ def http_number_all_i_want():
     source2 = alliwantWRONG.query.all()
     return render_template('visSiteall.html', item11=source1, item22=source2)
 
+@app.route('/_delete_record_200')
+def del200():
+    num = request.values.get('me', type=str)
+    result = errorTime.query.filter_by(id=num).first()
+    db.session.delete(result)
+    db.session.commit()
+    return
+
+
+@app.route('/_archiwizacja_200')
+def archiwum_x200():
+    num = request.values.get('me', type=str)
+    #args = http_put_status_code.parse_args()
+    #resulta = ArchiwumX.query.filter_by(id=num).first()
+    result = errorTime.query.filter_by(id=num).first()
+    miarka = ArchiwumX(id=num,
+                         url=result.url,
+                         status_code=result.status_code,
+                         dataTime=result.dataTime,
+                         error=result.error)
+
+    #miarka = ArchiwumX(id=num, url=[result.url], status_code=[result.status_code], dataTime=[result.dataTime],error=[result.error])
+    db.session.add(miarka)
+    db.session.delete(result)
+    db.session.commit()
+    return
+
 
 @app.route('/_delete_record')
 def delete_record():
@@ -306,6 +333,9 @@ class api_for_http_wrong(Resource):
         result = errorTime.query.filter_by(id=num).first()
         if result:
             abort(409, message='Record is taken...')
+        anotherCharge = ArchiwumX.query.filter_by(id=num).first()
+        if anotherCharge:
+            abort(409, message='Archiwum posiada taką pozycję, nie możńa tego już opublikować')
         miarka = errorTime(id=num, url=args['url'], status_code=args['status_code'], dataTime=args['dataTime'], error=args['error'])
         db.session.add(miarka)
         db.session.commit()
