@@ -1,5 +1,5 @@
 # import required as required
-from flask import Flask, render_template, make_response, redirect, url_for, flash
+from flask import Flask, render_template, make_response, redirect, url_for, flash, jsonify, request
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from flask_wtf import FlaskForm
 from time import time
@@ -70,8 +70,19 @@ class LoginForm(FlaskForm):
     submit = SubmitField(label='Zaloguj')
 
 
-# db.create_all()
 
+class ArchiwumX(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(100), nullable=False)
+    status_code = db.Column(db.Integer, nullable=False)
+    dataTime = db.Column(db.String(100), nullable=False)
+    error = db.Column(db.String(), nullable=False)
+
+    def __repr__(self):
+        return 'hello' #f"Rekord(url = {url}, status_code = {status_code}, dataTime = {dataTime}, error = {error})"
+
+
+#db.create_all()
 
 class databaseModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -186,19 +197,31 @@ def http_number_all_i_want():
     return render_template('visSiteall.html', item11=source1, item22=source2)
 
 
-def delete_record(num):
-    result = alliwantWRONG.query.filter_by(id=num).one()
+@app.route('/_delete_record')
+def delete_record():
+    num = request.values.get('me', type=str)
+    result = alliwantWRONG.query.filter_by(id=num).first()
     db.session.delete(result)
     db.session.commit()
     return
 
+@app.route('/_archiwizacja_')
+def archiwum_x():
+    num = request.values.get('me', type=str)
+    #args = http_put_status_code.parse_args()
+    #resulta = ArchiwumX.query.filter_by(id=num).first()
+    result = alliwantWRONG.query.filter_by(id=num).first()
+    miarka = ArchiwumX(id=num,
+                         url=result.url,
+                         status_code=result.status_code,
+                         dataTime=result.dataTime,
+                         error=result.error)
 
-@app.route('/setData', methods=["GET", "POST"])
-def setData():
-    data = [time() * 1000, random() * 100]
-    response = make_response(json.dumps(data))
-    response.content_type = 'application/json'
-    return response
+    #miarka = ArchiwumX(id=num, url=[result.url], status_code=[result.status_code], dataTime=[result.dataTime],error=[result.error])
+    db.session.add(miarka)
+    db.session.delete(result)
+    db.session.commit()
+    return
 
 
 @app.route('/rejestracja_1e8a9ae72c905a68d6de2c30', methods=['GET', 'POST'])
@@ -386,6 +409,9 @@ class all_i_want_WRONG(Resource):
         result = alliwantWRONG.query.filter_by(id=num).first()
         if result:
             abort(409, message='Record is taken...')
+        anotherCharge = ArchiwumX.query.filter_by(id=num).first()
+        if anotherCharge:
+            abort(409, message='Archiwum posiada taką pozycję, nie możńa tego już opublikować')
         miarka = alliwantWRONG(id=num, url=args['url'], status_code=args['status_code'], dataTime=args['dataTime'], error=args['error'])
         db.session.add(miarka)
         db.session.commit()

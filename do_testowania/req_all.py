@@ -1,7 +1,7 @@
 from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
-import URL
+import baza_req_all
 import re
 import time
 while True:
@@ -20,7 +20,7 @@ while True:
 
         while True:
             a = 1
-            for x in URL.strony:
+            for x in baza_req_all.strony:
 
                 def api(a, b, c, d, e):
 
@@ -34,11 +34,11 @@ while True:
                     d = error
                     """
                     if b == 200:
-                        requests.patch(base_url + str(e), data=data)
+                        #requests.patch(base_url + str(e), data=data)
                         requests.patch("http://212.32.248.106/v2/first/api/" + str(e), data=data)
                         return
                     else:
-                        requests.put(alert_url + str(e), data=data)
+                        #requests.put(alert_url + str(e), data=data)
                         requests.put('http://212.32.248.106/v2/twice/api/' + str(e), data=data)
                         return
 
