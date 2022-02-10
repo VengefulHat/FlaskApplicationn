@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}
-    Strona Startowa
+    Zamówienia
+{% endblock %}
+
+{% block meta %}
+<style>
+        #mena{
+            color: aliceblue;
+        }
+    </style>
 {% endblock %}
 
 {% block contentt %}
@@ -19,7 +27,7 @@
                     <a class="nav-link" href="{{ url_for('http_number_all_i_want') }}">HTTP Podstronny</a>
               </li>
               <li class="nav-item">
-                     <a class="nav-link" href="{{ url_for('cartHistory') }}">Testy zakupowe</a>
+                    <a class="nav-link" href="{{ url_for('cartHistory') }}">Testy zakupowe</a>
               </li>
           </ul>
           {% if current_user.is_authenticated %}
@@ -42,10 +50,43 @@
     </nav>
 {% endblock %}
 
-{% block content %}
-    <body>
-    <div class="container">
-        <img class="mb-4" width="" height="" src="https://e-forum.pl/frontend-eforum/images/logo.svg" alt="">
+{% block contenten %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <img src="" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p id="mena" class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
     </div>
-    </body>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <img src="" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a short card.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <img src="" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <img src="" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

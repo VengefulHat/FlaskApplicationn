@@ -173,10 +173,6 @@ def abort_nie_ma(dane):
         abort(404, message="Nie ma takego rekordu dzbanie")
 
 
-dane = {"name": {"age": 14, "gender": "male"}}
-
-
-
 @app.route('/home')
 def home_page():
     return render_template('home.html')
@@ -189,6 +185,10 @@ def http_number():
     basebase = errorTime.query.all()
     return render_template('visSite.html', item1=basedata, item2=basebase)
 
+@app.route('/show_me_the_receipt_for_purchases')
+def cartHistory():
+    return render_template('html_site_5.html')
+
 
 @app.route('/NHttp_for_all', methods=["GET", "POST"])
 def http_number_all_i_want():
@@ -196,9 +196,14 @@ def http_number_all_i_want():
     source2 = alliwantWRONG.query.all()
     return render_template('visSiteall.html', item11=source1, item22=source2)
 
+
 @app.route('/_delete_record_200')
 def del200():
     num = request.values.get('me', type=str)
+    if num == "0":
+        db.session.query(errorTime).delete()
+        db.session.commit()
+        return
     result = errorTime.query.filter_by(id=num).first()
     db.session.delete(result)
     db.session.commit()
@@ -227,10 +232,15 @@ def archiwum_x200():
 @app.route('/_delete_record')
 def delete_record():
     num = request.values.get('me', type=str)
+    if num == "0":
+        db.session.query(alliwantWRONG).delete()
+        db.session.commit()
+        return
     result = alliwantWRONG.query.filter_by(id=num).first()
     db.session.delete(result)
     db.session.commit()
     return
+
 
 @app.route('/_archiwizacja_')
 def archiwum_x():
@@ -266,6 +276,7 @@ def regist_er():
             flash(f'Wystapił błąd przy próbie rejestracji: {err_msg}', category='danger')
     return render_template('register.html', form=form)
 
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
@@ -292,6 +303,7 @@ nazwy = {'Bartek': {'age': 24, 'gender': 'male'},
          'Monika': {'age': 29, 'gender': 'female'},
          'Marysia': {'age': 27, 'gender': 'female'}}
 
+
 class api3(Resource):
     def get(self, name):
         return nazwy[name]
@@ -316,6 +328,8 @@ class HelloWorld(Resource):
 Za pomocą danych poniżej wstawiam dane i je pobieram - ale ze zemnej słownikowej (zapisuje je jako json) 
 """
 
+
+
 class apiA(Resource):
     def get(self, dane):
         abort_nie_ma(dane)
@@ -325,6 +339,7 @@ class apiA(Resource):
         args = dane_put_args.parse_args()
         data[dane] = args
         return data[dane], 201
+
 
 class api_for_http_wrong(Resource):
     @marshal_with(resource_fields)

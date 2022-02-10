@@ -13,13 +13,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('http_number') }}">HTTP główna_lista</a>
+                    <a class="nav-link" href="{{ url_for('http_number') }}">HTTP Główne Adresy</a>
               </li>
               <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('http_number_all_i_want') }}">HTTP all_href</a>
+                    <a class="nav-link" href="{{ url_for('http_number_all_i_want') }}">HTTP Podstronny</a>
               </li>
               <li class="nav-item">
-                    <a class="nav-link" href="">Opcje</a>
+                    <a class="nav-link" href="{{ url_for('cartHistory') }}">Testy zakupowe</a>
               </li>
           </ul>
           {% if current_user.is_authenticated %}
