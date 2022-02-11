@@ -311,7 +311,16 @@ strony = ['https://praktycznafizjoterapia.pl', 'https://charaktery.eu', 'https:/
 			'https://zaufanyterapeuta.charaktery.eu',
 			'https://zdrowe-swieta.pl',
 			'https://zelazopoloznictwoginekologia.pl',
-			'https://zycieszkoly.com.pl']
+			'https://zycieszkoly.com.pl',
+		  	'https://www.nadzor-pedagogiczny.pl/',
+		  	'https://www.pedagogia.pl/',
+		  'https://www.pracowniasi.pl/',
+		  'http://www.zapobiecprzemocy.pl/',
+		  'http://www.profilaktykauzaleznien.pl/',
+		  'https://www.administracjawoswiacie.pl/',
+		  'http://www.ewaluacjawszkole.pl/',
+		  'https://akademiastomatologa.pl/'
+		  ]
 
 
 """

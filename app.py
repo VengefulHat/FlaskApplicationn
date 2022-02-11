@@ -185,9 +185,14 @@ def http_number():
     basebase = errorTime.query.all()
     return render_template('visSite.html', item1=basedata, item2=basebase)
 
+
 @app.route('/show_me_the_receipt_for_purchases')
 def cartHistory():
-    return render_template('html_site_5.html')
+    lask = [{'url': "https://literkaprzedszkole.pl", 'client_type': 'Osoba prywatna', 'sub_type': 'Roczny', 'data_time': '12:11', 'error': 'Brak'},
+            {'url': "https://literkaprzedszkole.pl", 'client_type': 'Firma', 'sub_type': 'Miesięczny', 'data_time': '12:13', 'error': 'Brak'},
+            {'url': "https://literkaprzedszkole.pl", 'client_type': 'Jednostka Budżetowa', 'sub_type': 'Testowy','data_time': '22:33', 'error': 'Brak'},
+            {'url': "https://literkaprzedszkole.pl", 'client_type': 'Firma', 'sub_type': 'Roczny', 'data_time': '12:54', 'error': 'Brak'}]
+    return render_template('html_site_5.html', item=lask)
 
 
 @app.route('/NHttp_for_all', methods=["GET", "POST"])
@@ -345,16 +350,25 @@ class api_for_http_wrong(Resource):
     @marshal_with(resource_fields)
     def put(self, num):
         args = http_put_status_code.parse_args()
+
         result = errorTime.query.filter_by(id=num).first()
         if result:
             abort(409, message='Record is taken...')
+
         anotherCharge = ArchiwumX.query.filter_by(id=num).first()
+
         if anotherCharge:
             abort(409, message='Archiwum posiada taką pozycję, nie możńa tego już opublikować')
         miarka = errorTime(id=num, url=args['url'], status_code=args['status_code'], dataTime=args['dataTime'], error=args['error'])
+
+        anotherChargehu = ArchiwumX.query.filter_by(miarka.url).first()
+        if anotherChargehu:
+            abort(409, message='Archiwum posiada taką pozycję, nie możńa tego już opublikować')
+
         db.session.add(miarka)
         db.session.commit()
         return miarka, 201
+
 
 
 class api_for_hhtp(Resource):
@@ -454,10 +468,15 @@ class all_i_want_WRONG(Resource):
         result = alliwantWRONG.query.filter_by(id=num).first()
         if result:
             abort(409, message='Record is taken...')
+
         anotherCharge = ArchiwumX.query.filter_by(id=num).first()
         if anotherCharge:
             abort(409, message='Archiwum posiada taką pozycję, nie możńa tego już opublikować')
         miarka = alliwantWRONG(id=num, url=args['url'], status_code=args['status_code'], dataTime=args['dataTime'], error=args['error'])
+
+        anotherChargehu = ArchiwumX.query.filter_by(miarka.url).first()
+        if anotherChargehu:
+            abort(409, message='Archiwum posiada taką pozycję, nie możńa tego już opublikować')
         db.session.add(miarka)
         db.session.commit()
         return miarka, 201

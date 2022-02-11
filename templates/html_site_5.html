@@ -4,11 +4,7 @@
 {% endblock %}
 
 {% block meta %}
-<style>
-        #mena{
-            color: aliceblue;
-        }
-    </style>
+
 {% endblock %}
 
 {% block contentt %}
@@ -51,42 +47,38 @@
 {% endblock %}
 
 {% block contenten %}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      <img src="" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p id="mena" class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a short card.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-</div>
+ <h1>Najważniejsze co mają problem tutaj (kod HTTP inny niż 200)
+        <button id="endexist" type="button" class="btn btn-lg btn-outline-danger" style="position: absolute; right: 1px;">Wykasuj rekord</button>
+        <button id="archdel" type="button" class="btn btn-lg btn-outline-warning" style="position: absolute; right: 180px;">Archiwizuj</button>
+        <br>Odświeżam sie co 15 sekund bo prace nad dynamicznym ajaxem jeszcze trwają ;_;</h1>
+    <table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <!-- Your Columns HERE -->
+            <th scope="col">Adres WWW</th>
+            <th scope="col">Typ klienta</th>
+            <th scope="col">Typ subskrypcji / produktu</th>
+            <th scope="col">Data</th>
+            <th scope="col">Błędy</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for item in item %}
+    <tbody>
+
+            <tr>
+                <td>{{ item.url }}</td>
+                <td>{{ item.client_type }}</td>
+                <td>{{ item.sub_type }}</td>
+                <td>{{ item.data_time }}</td>
+                <td>{{ item.error }}</td>
+                <td>
+                    <button type="button" class="btn btn-light"><a href="{{ item.url }}" target="_blank">Przejdź do strony</a></button>
+                </td>
+            </tr>
+    </tbody>
+    {% endfor %}
+
+
 {% endblock %}
