@@ -215,7 +215,7 @@ strony = ['https://praktycznafizjoterapia.pl', 'https://charaktery.eu', 'https:/
 			'https://nowy.e-firma.pl',
 			'https://www.kongresmindfulness.pl/',
 			'https://www.kongresbhp.pl/',
-			'https://ksiazka-obiektu',
+			'https://ksiazka-obiektu.pl',
 			'https://opieka-farmaceutyczna.eu',
 			'https://www.opiekaokoloporodowa.pl/',
 			'https://ortopediainterdyscyplinarnie.pl',

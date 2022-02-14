@@ -266,6 +266,21 @@ def archiwum_x():
     return
 
 
+@app.route('/return_zero')
+def de_active_arch_to_main():
+    num = request.values.get('me', type=str)
+    result = ArchiwumX.query.filter_by(id=num).first()
+    db.session.delete(result)
+    db.session.commit()
+    return
+
+
+@app.route('/archiwum')
+def archiw():
+    dane = ArchiwumX.query.all()
+    return render_template('archiwum.html', item=dane)
+
+
 @app.route('/rejestracja_1e8a9ae72c905a68d6de2c30', methods=['GET', 'POST'])
 def regist_er():
     form = RegisterForm()

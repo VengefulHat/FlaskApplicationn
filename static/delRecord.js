@@ -58,3 +58,13 @@ $('button#archdel200').bind('click', function() {
   });
 });
 });
+/// funkcja dla przywracania w sumie to do wywalania z arciwum pewnych rekorów
+$(function()
+{
+$('button#lojalka').bind('click', function() {
+   var num = prompt("Wywal z bazy danych stronę aby ponownie się pojawiała w liście alertów: ", "");
+  $.getJSON('http://127.0.0.1:5000/return_zero', {
+    me: num
+  });
+});
+});

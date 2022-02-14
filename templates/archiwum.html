@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}
-    Strona Startowa
+    Zamówienia
+{% endblock %}
+
+{% block meta %}
+
 {% endblock %}
 
 {% block contentt %}
@@ -19,7 +23,7 @@
                     <a class="nav-link" href="{{ url_for('http_number_all_i_want') }}">HTTP Podstronny</a>
               </li>
               <li class="nav-item">
-                     <a class="nav-link" href="{{ url_for('cartHistory') }}">Testy zakupowe</a>
+                    <a class="nav-link" href="{{ url_for('cartHistory') }}">Testy zakupowe</a>
               </li>
           </ul>
           {% if current_user.is_authenticated %}
@@ -46,9 +50,36 @@
 {% endblock %}
 
 {% block content %}
-    <body>
-    <div class="container">
-        <img class="mb-4" width="" height="" src="https://e-forum.pl/frontend-eforum/images/logo.svg" alt="">
-    </div>
-    </body>
+        <h1>
+        <button id="lojalka" type="button" class="btn btn-lg btn-outline-danger" style="position: absolute; right: 1px;">Przywróć do żywych</button>
+        <br>Odświeżam sie co 15 sekund bo prace nad dynamicznym ajaxem jeszcze trwają ;)</h1>
+    <table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <!-- Your Columns HERE -->
+            <th scope="col">ID</th>
+            <th scope="col">URl</th>
+            <th scope="col">STATUS_CODE</th>
+            <th scope="col">DATE</th>
+            <th scope="col">ERRORS</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for item in item %}
+    <tbody>
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.url }}</td>
+                <td>{{ item.status_code }}</td>
+                <td>{{ item.dataTime }}</td>
+                <td>{{ item.error }}</td>
+                <td>
+                    <button type="button" class="btn btn-light"><a href="{{ item.url }}" target="_blank">Przejdź do strony</a></button>
+                </td>
+            </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
 {% endblock %}
